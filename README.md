@@ -1,2 +1,1 @@
-# VilgaBot
-Easy study for everyone
+# telegram-bot
