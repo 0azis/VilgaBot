@@ -107,18 +107,19 @@ def get_hw():
   ls.insert(0, str('Предметы'))
   hws.insert(0, str('Домашнее задание'))
 
-
-  for n in hws:
-    if len(n) > 100:
-
+  log = []
+  for n in zip(hws, ls):
+    if len(n[0]) > 100:
+      log.append(n)
       # s = n.split(' ')
       # print(s)
       # s[int(len(s)/2)] = '\n'
       # s[int(len(s)/2/2)] = '\n'
-      hws.insert(hws.index(n), "".join(n.split(' ')[:4]))
-      hws.remove(n)
-
-
+      hws.insert(hws.index(n[0]), "".join(n[0].split(' ')[:4]))
+      hws.remove(n[0])
+  res = []
+  for l in log:
+    res.append(f"*{l[1]}*: {l[0]}\n")
   fig, ax = plt.subplots()
   im = plt.imread('/home/bot-schedule/bb.png')
   imagebox = OffsetImage(im, zoom = 0.06)
@@ -138,3 +139,4 @@ def get_hw():
 
   ax.axis('off')
   plt.savefig(f'/outputs/hw {tomorrow()}.png', dpi=800)
+  return res
