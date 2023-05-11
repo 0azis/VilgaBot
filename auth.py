@@ -18,6 +18,7 @@ def get_html(date: str):
     chrome_options.add_argument('--disable-dev-shm-usage')
     # '/usr/bin/chromedriver', chrome_options=chrome_options
     brow = webdriver.Chrome('/usr/bin/chromedriver', chrome_options=chrome_options)
+    #brow = webdriver.Chrome()
     brow.get(url)
     time.sleep(3)
     brow.find_element(By.ID, 'login').send_keys(phone)
@@ -31,10 +32,11 @@ def get_html(date: str):
     aut4 = WebDriverWait(brow, 10).until(EC.element_to_be_clickable((By.XPATH, '//a[contains(@href,"#homework")]')))
     aut4.click()
     aut5 = WebDriverWait(brow, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '.right .top .calendar_btn > .ico, .right .top .calendar_btn.active:hover > .ico')))
-    aut5.click() 
-    aut6 = WebDriverWait(brow, 10).until(EC.element_to_be_clickable((By.XPATH, f"//a[contains(@class,'ui-state-default') and //text()='{date}']")))
+    aut5.click()
+    time.sleep(1) 
+    aut6 = WebDriverWait(brow, 10).until(EC.element_to_be_clickable((By.XPATH, f"//a[contains(@class,'ui-state-default') and .//text()='12']")))
     aut6.click()
-    time.sleep(5)
+    time.sleep(3)
     with open('/home/bot-schedule/dz_page.txt', 'w') as file:
       file.write(brow.page_source)
     brow.quit()
