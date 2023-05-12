@@ -49,7 +49,7 @@ def get_img(datte, clas: str):
     table = ax.table(cellText=table_data, loc='center')
     csfont = {'fontname':'Arial'}
     # plt.title('f.png')
-    ax.set_title(f"{clas} класс на {datte}", x=0.34, y=0.96, fontsize=10, fontweight='bold', **csfont, color='#048B7B')
+    ax.set_title(f"{clas} класс на {datte}", x=0.25, y=0.96, fontsize=10, fontweight='bold', **csfont, color='#048B7B')
     
     table[(0, 0)].set_facecolor("#048B7B")
     table[(0, 1)].set_facecolor("#048B7B")
