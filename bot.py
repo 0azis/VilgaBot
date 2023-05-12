@@ -64,10 +64,12 @@ def answers(message):
       get_hw()
       print(tomorrow())
       bot.send_photo(message.chat.id, photo=open(f'/outputs/hw {tomorrow()}.png', 'rb'))
-      bot.send_message(message.chat.id, text="Слишком длинное задание, вот полный текст:")
-      bot.send_message(message.chat.id, text=get_hw(), parse_mode= 'Markdown')
-      bot.send_message(message.chat.id, text=f"Вот домашнее задание на {tomorrow()}", reply_markup=markup)
-      bot.send_message(message.chat.id, text=f"Подписывайся на нашу группу в VK", reply_markup=m)
+      if len(get_hw()) != 0:
+        bot.send_message(message.chat.id, text="Слишком длинное задание, вот полный текст:")
+        bot.send_message(message.chat.id, text=get_hw(), parse_mode= 'Markdown')
+      else:
+        bot.send_message(message.chat.id, text=f"Вот домашнее задание на {tomorrow()}", reply_markup=markup)
+        bot.send_message(message.chat.id, text=f"Подписывайся на нашу группу в VK", reply_markup=m)
     except Exception as _ex:
       bot.send_message(message.chat.id, text=f'Неизвестная ошибка. Попробуй еще раз {_ex}')
 
