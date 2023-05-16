@@ -1,2 +1,2 @@
 # telegram-bot
-![Alt text](relative%backimg.png?raw=true "Title")
+![Alt text](./backimg.png "Optional title")
