@@ -1,4 +1,4 @@
-outputs
-__pycache__
+outputs/
+__pycache__/
 conf.py
 dz_page.txt
