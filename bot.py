@@ -5,11 +5,11 @@ from get import *
 from parsing import *
 from reading import *
 from gdz import *
-import os
+from conf import *
 
 gdz_data = []
 classes = ['5класс', '6 класс', '7 класс', '8 класс', '9 класс', '10 класс', '11 класс']
-bot = telebot.TeleBot('5974518842:AAF9W6oy8IvBd9FEGlKu6PWx1SNLbSIgLRU')
+bot = telebot.TeleBot(token)
 
 def some_error(message):
   markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
