@@ -9,20 +9,20 @@ from config import *
 #get_date(0)
 url = 'https://school.karelia.ru/auth/esia/send-authn-request'
 def get_html(date: str):
-  with open('/home/bot-schedule/dz_page.txt', 'w') as file:
+  with open('./dz_page.txt', 'w') as file:
     pass
   try:
     chrome_options = Options()
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--disable-dev-shm-usage')
-    # '/usr/bin/chromedriver', chrome_options=chrome_options
-    brow = webdriver.Chrome('/usr/bin/chromedriver', chrome_options=chrome_options)
-    #brow = webdriver.Chrome()
+    # chrome_options.add_argument('--no-sandbox')
+    # chrome_options.add_argument('--headless')
+    # chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument('/usr/bin/chromedriver', chrome_options=chrome_options)
+    #brow = webdriver.Chrome('/usr/bin/chromedriver', chrome_options=chrome_options)
+    brow = webdriver.Chrome()
     brow.get(url)
     time.sleep(3)
-    brow.find_element(By.ID, 'login').send_keys(phone)
-    brow.find_element(By.ID, 'password').send_keys(password)
+    brow.find_element(By.ID, 'login').send_keys("89095680349")
+    brow.find_element(By.ID, 'password').send_keys("rektvf_1ZX%")
     # 6 steps proccess
     aut = WebDriverWait(brow, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, "plain-button_wide")))
     aut.click()
@@ -41,11 +41,5 @@ def get_html(date: str):
       file.write(brow.page_source)
     brow.quit()
   except Exception as _ex: 
-    print("Error", _ex)
     brow.quit()
     return get_html(date)
-
-
-#<div class="overlay" style="display: block;"></div>
-
-#r=requests.get('<MY_URI>', auth=('<YOUR_USERNAME>', '<YOUR_PASSWORD>'))

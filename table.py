@@ -1,10 +1,8 @@
 from config import *
-from parsing import *
+from homework import *
 import openpyxl
 import matplotlib.pyplot as plt
 from matplotlib.offsetbox import (OffsetImage, AnnotationBbox)
-
-
 
 def get_img(datte, clas: str):
   wookbook = openpyxl.load_workbook(f"./outputs/{datte} schedule.xlsx")
@@ -13,8 +11,8 @@ def get_img(datte, clas: str):
     '5': ['C 2', 'E 2'],
     '6': ['G 2', 'I 2'],
     '7': ['K 2', 'M 2'],
-    '8': ['C 11', 'E 11'],
-    '9': ['G 11', 'I 11'],
+    '8': ['C 12', 'E 12'],
+    '9': ['G 12', 'I 12'],
     '10': ['K 12'],
     '11': ['M 12']
   }
@@ -35,7 +33,7 @@ def get_img(datte, clas: str):
     
     #define figure and axes
     fig, ax = plt.subplots()
-    im = plt.imread('./bb.png')
+    im = plt.imread('./assets/bb.png')
     imagebox = OffsetImage(im, zoom = 0.05)
     ab = AnnotationBbox(imagebox, (0.05, 1), frameon = False)
     ax.add_artist(ab)
@@ -73,7 +71,7 @@ def get_img(datte, clas: str):
       times.append(ws[f'{time_classes[0]}{i}'].value)
     #define figure and axes
     fig, ax = plt.subplots()
-    im = plt.imread('./bb.png')
+    im = plt.imread('./assets/bb.png')
     imagebox = OffsetImage(im, zoom = 0.05)
     ab = AnnotationBbox(imagebox, (0.04, 1), frameon = False)
     ax.add_artist(ab)
@@ -102,8 +100,8 @@ def get_img(datte, clas: str):
 
 
 def get_hw():
-  ls = parsing_homework(get_data(0))[0]
-  hws = parsing_homework(get_data(0))[1]
+  ls = parsingHomework(get_data(0))[0]
+  hws = parsingHomework(get_data(0))[1]
   ls.insert(0, str('Предметы'))
   hws.insert(0, str('Домашнее задание'))
 
@@ -121,7 +119,7 @@ def get_hw():
   for l in log:
     res.append(f"*{l[1]}*: {l[0]}\n")
   fig, ax = plt.subplots()
-  im = plt.imread('./bb.png')
+  im = plt.imread('./assets/bb.png')
   imagebox = OffsetImage(im, zoom = 0.06)
   ab = AnnotationBbox(imagebox, (0.5, 1), frameon = False)
   ax.add_artist(ab)
@@ -142,7 +140,7 @@ def get_hw():
   return res
 
 
-def FoodParser(date, timeToFood: str):
+def FoodgetUploadFolderr(date, timeToFood: str):
   foodXlsx = openpyxl.load_workbook(f"./outputs/{date} food.xlsx")
   excelCursor = foodXlsx.active
   resultForDiner = 0
@@ -206,7 +204,7 @@ def FoodParser(date, timeToFood: str):
     
 
     fig, ax = plt.subplots()
-    im = plt.imread('./bb.png')
+    im = plt.imread('./assets/bb.png')
     imagebox = OffsetImage(im, zoom = 0.05)
     ab = AnnotationBbox(imagebox, (0.05, 0.9), frameon = False)
     ax.add_artist(ab)

@@ -18,8 +18,6 @@ def math(classs: str, problem: str):
       if str(i[0].contents[0].split(',')[0]) == "А.Г. Мордкович":
         url = i[1]['href']
         break
-  
-
 
   r2 = requests.get(f'https://gdz.ru{url}')
   soup2 = BeautifulSoup(r2.text, 'html.parser')

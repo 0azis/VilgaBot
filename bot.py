@@ -1,14 +1,14 @@
 import telebot
 from telebot import types
 from config import *
-from get import *
-from parsing import *
-from reading import *
+from download import *
+from homework import *
+from table import *
 from gdz import *
 from config import *
 
 gdz_data = []
-classes = ['5класс', '6 класс', '7 класс', '8 класс', '9 класс', '10 класс', '11 класс']
+classes = ['5 класс', '6 класс', '7 класс', '8 класс', '9 класс', '10 класс', '11 класс']
 timeOfFood = ["Завтрак", "Обед"]
 bot = telebot.TeleBot("5974518842:AAF9W6oy8IvBd9FEGlKu6PWx1SNLbSIgLRU")
 
@@ -29,9 +29,9 @@ def start(message):
   btn3 = types.KeyboardButton("Скинь ДЗ")
   btn4 = types.KeyboardButton("Че хаваем завтра")
   markup.add(btn1, btn2, btn3, btn4)
-  bot.send_message(message.chat.id, text="Привет, {0.first_name}! Я *VilgaBOT*, который сделает твою учебу проще.".format(message.from_user), parse_mode= 'Markdown')
-  bot.send_photo(message.chat.id, photo=open('./f.png', 'rb'))
-  bot.send_message(message.chat.id, text="Выбери опцию, *используя кнопки*, которую ты хотел, чтобы я исполнил".format(message.from_user), reply_markup=markup, parse_mode= 'Markdown')
+  bot.send_message(message.chat.id, text="Привет, {0.first_name}! Я *VilgaBOT*, который сделает твою учебу проще.".format(message.from_user), parse_mode='Markdown')
+  bot.send_photo(message.chat.id, photo=open('./assets/f.png', 'rb'))
+  bot.send_message(message.chat.id, text="Выбери опцию, *используя кнопки*, которую ты хотел, чтобы я исполнил".format(message.from_user), reply_markup=markup, parse_mode='Markdown')
 
 @bot.message_handler(content_types=['text'])
 def answers(message):
@@ -69,7 +69,7 @@ def answers(message):
       bot.send_photo(message.chat.id, photo=open(f'./outputs/hw {tomorrow()}.png', 'rb'))
       if len(get_hw()) != 0:
         bot.send_message(message.chat.id, text="Слишком длинное задание, вот полный текст:")
-        bot.send_message(message.chat.id, text=get_hw(), parse_mode= 'Markdown')
+        bot.send_message(message.chat.id, text=get_hw(), getUploadFolder_mode= 'Markdown')
       else:
         bot.send_message(message.chat.id, text=f"Вот домашнее задание на {tomorrow()}", reply_markup=markup)
         bot.send_message(message.chat.id, text=f"Подписывайся на нашу группу в VK", reply_markup=m)
@@ -89,12 +89,12 @@ def answers(message):
 
 def get_clas(message):   
   if message.text in classes:
-    if type(parse(tomorrow())) is not list:
+    if type(getUploadFolder(tomorrow())) is not list:
       m = types.InlineKeyboardMarkup()
       bt1 = types.InlineKeyboardButton("Группа VK", url='https://vk.com/vilga_bot')
       m.add(bt1)
       classs = message.text.split(' ')[0]
-      DownloadSchedule(tomorrow(), parse(tomorrow()))
+      DownloadSchedule(tomorrow(), getUploadFolder(tomorrow()))
       get_img(tomorrow(), classs)
       markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
       btn1 = types.KeyboardButton("Скинь расписание")
@@ -117,8 +117,8 @@ def get_clas(message):
       btn4 = types.KeyboardButton("Че хаваем завтра")
       markup.add(btn1, btn2, btn3, btn4)
       bot.send_message(message.chat.id, text=f"Расписание еще не выложили")
-      today_date = parse(tomorrow())[0]
-      today_folder = parse(tomorrow())[1]
+      today_date = getUploadFolder(tomorrow())[0]
+      today_folder = getUploadFolder(tomorrow())[1]
       bot.send_message(message.chat.id, text=f"Вот расписание на последнюю доступную дату: {today_date}")
       DownloadSchedule(today_date, today_folder)
       get_img(today_date, classs)
@@ -155,7 +155,7 @@ def getTypeFood(message):
     btn4 = types.KeyboardButton("Че хаваем завтра")
     markup.add(btn1, btn2, btn3, btn4)
     DownloadFood(FoodTime())
-    FoodParser(FoodTime(), message.text)
+    FoodgetUploadFolderr(FoodTime(), message.text)
     bot.send_message(message.chat.id, text=f"Вот меню столовой на {FoodTime()}", reply_markup=markup)
     bot.send_photo(message.chat.id, photo=open(f'./outputs/{FoodTime()} food.png', 'rb'))
     bot.send_message(message.chat.id, text=f"Подписывайся на нашу группу в VK", reply_markup=m)
@@ -191,7 +191,7 @@ def final_sol(message):
     btn3 = types.KeyboardButton("Скинь ДЗ")
     btn4 = types.KeyboardButton("Че хаваем завтра")
     markup.add(btn1, btn2, btn3, btn4)
-    bot.send_message(message.chat.id, text=f"Неизвестная ошибка. Попробуй еще раз", reply_markup=markup) 
+    bot.send_message(message.chat.id, text=f"Неизвестная ошибка. Попробуй еще раз {_ex}", reply_markup=markup) 
   #os.remove(f'{tomorrow()} {classs}.png') 
   # markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
   # btn1 = types.KeyboardButton("Скинь расписание")
