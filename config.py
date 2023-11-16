@@ -6,6 +6,7 @@ import time
 
 # creating the today date for sending schedule for that date
 dt_now = str(datetime.datetime.now()).split(" ")[0].split('-')
+
 # today is variable with today date, using in function "Gimme the schedule"
 # today = str(dt_now[2] + '.' + dt_now[1] + '.' + dt_now[0])
 # folder_today is variable, which contains folder for URL link for schedule
@@ -57,3 +58,8 @@ def get_data(option: int):
     date = str(date.split('.')[0]).replace('0', '')
   return str(date)
 
+def FoodTime():
+  dt_now = str(datetime.datetime.now()).split(" ")[0].split("-")
+  dt_now[2] = str(int(dt_now[2]) + 1)
+  return '-'.join(dt_now)
+  

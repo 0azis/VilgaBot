@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-from conf import *
+from config import *
 
 #get_date(0)
 url = 'https://school.karelia.ru/auth/esia/send-authn-request'

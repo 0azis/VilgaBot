@@ -39,5 +39,5 @@ def math(classs: str, problem: str):
   solution_url = 'https:' + solution2[0]['src']
   
   img_data = requests.get(solution_url).content
-  with open(f'/outputs/{problem} {classs}.jpg', 'wb') as handler:
+  with open(f'./outputs/{problem} {classs}.jpg', 'wb') as handler:
     handler.write(img_data)
