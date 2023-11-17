@@ -2,16 +2,36 @@
 # 
 import datetime
 import time
+import requests
+from bs4 import BeautifulSoup
 
 
 # creating the today date for sending schedule for that date
 dt_now = str(datetime.datetime.now()).split(" ")[0].split('-')
+
 # today is variable with today date, using in function "Gimme the schedule"
 # today = str(dt_now[2] + '.' + dt_now[1] + '.' + dt_now[0])
 # folder_today is variable, which contains folder for URL link for schedule
-# folder_today = str(parse(today))
+# folder_today = str(getUploadFolder(today))
 
 
+def getUploadFolder(date: str):
+  r = requests.get('https://nvschool3.ru/raspisanie/')
+  soup = BeautifulSoup(r.text, 'html.parser')
+  all_p = soup.findAll('p', {'class': 'news-item'})
+  soup2 = BeautifulSoup(str(all_p), 'html.parser')
+  all_a = soup2.findAll('a')
+  res = []
+  # creating list with res
+  for i in all_a:
+    local = str(i['href']).split("/")
+    local.insert(4, local[4].split(" "))
+    res.append(local)
+  for g in res:
+    if g[4][0] == date and g[4][1] == "ОСНОВНАЯ":
+      return str(g[3])
+    elif g[4][1] == "ОСНОВНАЯ":
+      return list([str(g[4][0]), str(g[3])])
 
 TIME_TO_SEND = '17:00( 00 )'
 def check_send_time():
@@ -57,3 +77,8 @@ def get_data(option: int):
     date = str(date.split('.')[0]).replace('0', '')
   return str(date)
 
+def FoodTime():
+  dt_now = str(datetime.datetime.now()).split(" ")[0].split("-")
+  dt_now[2] = str(int(dt_now[2]) + 1)
+  return '-'.join(dt_now)
+  

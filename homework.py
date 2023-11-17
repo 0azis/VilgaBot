@@ -3,29 +3,9 @@ from bs4 import BeautifulSoup
 import requests
 from config import *
 
-def parse(date: str):
-  r = requests.get('https://nvschool3.ru/raspisanie/')
-  soup = BeautifulSoup(r.text, 'html.parser')
-  all_p = soup.findAll('p', {'class': 'news-item'})
-  soup2 = BeautifulSoup(str(all_p), 'html.parser')
-  all_a = soup2.findAll('a')
-  res = []
-  # creating list with res
-  for i in all_a:
-    local = str(i['href']).split("/")
-    local.insert(4, local[4].split(" "))
-    res.append(local)
-  for g in res:
-    if g[4][0] == date and g[4][1] == "ОСНОВНАЯ":
-      return str(g[3])
-    elif g[4][1] == "ОСНОВНАЯ":
-      return list([str(g[4][0]), str(g[3])])
-
-
-def parsing_homework(date: str):
-  isThere = False
+def parsingHomework(date: str):
   read_html = open('/home/bot-schedule/dz_page.txt','r')
-  soup = BeautifulSoup(read_html, 'html.parser')
+  soup = BeautifulSoup(read_html, 'html.getUploadFolderr')
   uls = soup.findAll('div', {'class': 'date'})
   tables = soup.find_all('tbody')
   tables.pop(0)
@@ -41,7 +21,7 @@ def parsing_homework(date: str):
     else:
       res = 0
 
-  soup2 = BeautifulSoup(str(res), 'html.parser')
+  soup2 = BeautifulSoup(str(res), 'html.getUploadFolderr')
   studies = soup2.findAll('td', {'class': 'lesson'})
   homeworks = soup2.findAll('td', {'class': 'homework'})
 
