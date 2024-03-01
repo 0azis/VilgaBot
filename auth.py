@@ -21,8 +21,8 @@ def get_html(date: str):
     brow = webdriver.Chrome()
     brow.get(url)
     time.sleep(3)
-    brow.find_element(By.ID, 'login').send_keys("89095680349")
-    brow.find_element(By.ID, 'password').send_keys("rektvf_1ZX%")
+    brow.find_element(By.ID, 'login').send_keys("*")
+    brow.find_element(By.ID, 'password').send_keys("*")
     # 6 steps proccess
     aut = WebDriverWait(brow, 10).until(EC.element_to_be_clickable((By.CLASS_NAME, "plain-button_wide")))
     aut.click()
